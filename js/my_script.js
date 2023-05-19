@@ -35,10 +35,8 @@ $(function () {
       new card("Jack", x, 13),
     ];
   }
-  //Cards 함수 내에서 카드 객체들을 생성하고 배열로 반환하지 않으면, Cards 함수를 호출했을 때 아무것도 반환되지 않기 때문에 deck 배열에 아무것도 들어가지 않습니다.
-  // 따라서 Cards 함수에서 생성한 카드 객체들을 배열로 반환하면 deck 배열에 해당 배열이 들어가고, deck 배열은 카드 덱을 구성하게 됩니다. 이를 위해 return을 사용합니다.
+
   const deck = [...Cards(D), ...Cards(C), ...Cards(H), ...Cards(S)];
-  // alert(`${deck[1].name} ${deck[1].suit} ${deck[1].value}` );
 
   // ...Diamonds(D)는 "spread" 문법으로, Diamonds(D) 배열의 요소를 개별적인 인자로 풀어서 전달하는 역할을 합니다. 이를 사용하면 배열을 개별적인 값들로 편리하게 전달할 수 있습니다.
   // 예를 들어, Diamonds(D) 배열에 13개의 카드 객체가 들어있고, ...Diamonds(D)를 사용하면 13개의 카드 객체를 전부 개별적인 인자로 펼쳐서 전달할 수 있습니다.
@@ -87,9 +85,6 @@ $(function () {
       }
     }
   };
-
-
-
 
   function sum(arr) {
     let total = 0;
