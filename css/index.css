@@ -1,34 +1,67 @@
-
-#main{
-    text-align: center
+* {
+  margin: 0;
+  padding: 0;
+  cursor: none;
 }
 
-#my_hand{
-    border: 5px solid red;
-    height: 250px;
-    width: 850px;
-    display: flex;
-    margin: 0 auto;
+#div {
+  position: absolute;
+  cursor: none;
 
+  z-index: 50;
 }
-#my_hand .imgWrap{
-    display: flex;
+#div img {
+  width: 30px;
+  height: 30px;
+}
+.background {
+  background-color: #faebd7;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+#main {
+  text-align: center;
 }
 
-#imgResult{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#my_hand {
+  background-color: green;
+  border: 1px solid rgb(255, 255, 255);
+  height: 250px;
+  width: 850px;
+  display: flex;
+  margin: 0 auto;
+}
+#my_hand .imgWrap {
+  display: flex;
 }
 
-#my_hand,#btnDeal,#btnHit,#btnStick{
-    display: none;
+#imgResult {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.red{
-    color: red;
+#my_hand,
+#btnDeal,
+#btnHit,
+#btnStick {
+  display: none;
 }
-.blue{
-    color: blue;
+
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+
+.start {
+  position: absolute;
+  z-index: 3;
+  width: 200px;
+  height: 50px;
 }

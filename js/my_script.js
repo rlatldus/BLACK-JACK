@@ -1,10 +1,22 @@
+// 배경흐리게
 $(function () {
+  $('.start').click(function () {
+    $('.background').fadeOut(function () {
+      $(this)
+        .css({
+          'z-index': -1,
+          'background-color': '#faebd7',
+        })
+        .fadeIn();
+    });
+  });
+});
 
-  $('#btnRestart').click(function(){
-    $('#my_hand').css('display','block')
-    $('#btnRestart').attr('src','images/deck_small.jpg')
-  })
-
+$(function () {
+  $('#btnRestart').click(function () {
+    $('#my_hand').css('display', 'block');
+    $('#btnRestart').attr('src', 'images/deck_small.jpg');
+  });
 
   //생성자 함수
   function card(name, suit, value) {
@@ -13,26 +25,26 @@ $(function () {
     this.value = value;
   }
 
-  const D = "Diamonds";
-  const C = "Clubs";
-  const H = "Hearts";
-  const S = "Spades";
+  const D = 'Diamonds';
+  const C = 'Clubs';
+  const H = 'Hearts';
+  const S = 'Spades';
 
   function Cards(x) {
     return [
-      new card("Ace", x, 1), // 카드객체(인스턴스)
-      new card("Two", x, 2),
-      new card("Three", x, 3),
-      new card("Four", x, 4),
-      new card("Five", x, 5),
-      new card("Six", x, 6),
-      new card("Seven", x, 7),
-      new card("Eight", x, 8),
-      new card("Nine", x, 9),
-      new card("Ten", x, 10),
-      new card("King", x, 11),
-      new card("Queen", x, 12),
-      new card("Jack", x, 13),
+      new card('Ace', x, 1), // 카드객체(인스턴스)
+      new card('Two', x, 2),
+      new card('Three', x, 3),
+      new card('Four', x, 4),
+      new card('Five', x, 5),
+      new card('Six', x, 6),
+      new card('Seven', x, 7),
+      new card('Eight', x, 8),
+      new card('Nine', x, 9),
+      new card('Ten', x, 10),
+      new card('King', x, 11),
+      new card('Queen', x, 12),
+      new card('Jack', x, 13),
     ];
   }
 
@@ -52,38 +64,36 @@ $(function () {
     cardss: [],
     current_total: 0,
     sumCardTotal: function () {
-      //FIXME - 총합계산 
+      //FIXME - 총합계산
       this.current_total = 0;
-      for(let i=0; i<this.cardss.length; i++ ){
+      for (let i = 0; i < this.cardss.length; i++) {
         const c = hand.cardss[i]; //c 카드의 value값을넣어서 담는다.
-        this.current_total +=  c.value
+        this.current_total += c.value;
       }
 
       $('#hdrTotal').html(`합계: ${hand.current_total}`);
-      
-      const end = () =>{
+
+      const end = () => {
         $('#btnHit').hide();
         $('#btnDeal').hide();
         $('#btnStick').hide();
         // $('#btnRestart').hide();
-      }
+      };
 
-      if(this.current_total>21){
-        alert("패");
-        $("#imgResult").attr('src','images/x.png');
-        $('#hdrResult').html('BUST').attr('class','red');
+      if (this.current_total > 21) {
+        alert('패');
+        $('#imgResult').attr('src', 'images/x.png');
+        $('#hdrResult').html('BUST').attr('class', 'red');
         end();
-
-      }else if(this.current_total === 21){
-        alert("무");
-        $("#imgResult").attr('src','images/check.png');
-        $('#hdrResult').html('BLACK JACK!').attr('class','blue');
+      } else if (this.current_total === 21) {
+        alert('무');
+        $('#imgResult').attr('src', 'images/check.png');
+        $('#hdrResult').html('BLACK JACK!').attr('class', 'blue');
         end();
-
-      }else if(this.current_total <= 21 && this.cardss.length ==5){
+      } else if (this.current_total <= 21 && this.cardss.length == 5) {
         end();
       }
-    }
+    },
   };
 
   function sum(arr) {
@@ -96,35 +106,34 @@ $(function () {
 
   function hit() {
     //5.카드펼쳐서 계산하는 동작
-    do{ 
-    const index = Random(52); //FIXME - 뽑았던거 다시 뽑게 해줘야 함
-    
-    if ($.inArray(index, usercards) !== -1) { // 배열에 없다면 -1 이  반환
-      continue; //배열에 있다면, 다시 실행
-    }
+    do {
+      const index = Random(52); //FIXME - 뽑았던거 다시 뽑게 해줘야 함
 
-    usercards[usercards.length] = index;
-    // alert(`현재 플리이어가 사용한 카드 갯수 : ${usercards.length}`);
-    console.log(`${deck[Random(52)].value}`);
-    const c = deck[index]; //모든 카드가 담긴 인덱스 자리에 랜덤숫자를 넣어 카드하나 담음
-    hand.cardss[hand.cardss.length] = c;
-    // alert(`현재 플리이어가 가지고 있는 카드 갯수 : ${hand.cardss.length}`);
-    
-    console.log(`${usercards.length}`);
-    
-    const $d = $("<div id='imgWrap'>");
+      if ($.inArray(index, usercards) !== -1) {
+        // 배열에 없다면 -1 이  반환
+        continue; //배열에 있다면, 다시 실행
+      }
 
-    $('<img class="img">')
-    .appendTo($d)
-    .attr("src", `images/cards/${c.suit}/${c.name}.jpg`)
-    .fadeOut()
-    .fadeIn();
-    $d.appendTo($("#my_hand"));
-    }
-    while(0);
+      usercards[usercards.length] = index;
+      // alert(`현재 플리이어가 사용한 카드 갯수 : ${usercards.length}`);
+      console.log(`${deck[Random(52)].value}`);
+      const c = deck[index]; //모든 카드가 담긴 인덱스 자리에 랜덤숫자를 넣어 카드하나 담음
+      hand.cardss[hand.cardss.length] = c;
+      // alert(`현재 플리이어가 가지고 있는 카드 갯수 : ${hand.cardss.length}`);
+
+      console.log(`${usercards.length}`);
+
+      const $d = $("<div id='imgWrap'>");
+
+      $('<img class="img">')
+        .appendTo($d)
+        .attr('src', `images/cards/${c.suit}/${c.name}.jpg`)
+        .fadeOut()
+        .fadeIn();
+      $d.appendTo($('#my_hand'));
+    } while (0);
     hand.sumCardTotal();
   }
-
 
   function deal() {
     for (var i = 0; i < 2; i++) {
@@ -137,7 +146,7 @@ $(function () {
     }
   }
 
-  $("#btnHit").click(function () {
+  $('#btnHit').click(function () {
     // 모든 카드가 뒤집어진이미지를 클릭하면 카드게임시작
     //1. 카드를 분배(deal)해서 게임 시작
     deal(); //hit함수로 연결
