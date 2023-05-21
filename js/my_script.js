@@ -13,9 +13,32 @@ $(function () {
 });
 
 $(function () {
+  //FIXME -
+  $('.again').click(function () {
+    // location.reload();
+    $('.background').fadeOut(function () {
+      $(this)
+        .css({
+          'z-index': -1,
+          'background-color': '#faebd7',
+        })
+        .fadeIn();
+    });
+    $('#btnRestart').slideDown(1000);
+    $('#btnHit').css('display', 'block');
+  });
+  $('.stop').click(function () {
+    location.reload();
+  });
+
   $('#btnRestart').click(function () {
     $('#my_hand').css('display', 'block');
     $('#btnRestart').attr('src', 'images/deck_small.jpg');
+
+    $('#btnRestart').click(function () {
+      $('#btnRestart').slideDown(1000);
+      $('#btnHit').css('display', 'block');
+    });
   });
 
   //생성자 함수
@@ -49,10 +72,6 @@ $(function () {
   }
 
   const deck = [...Cards(D), ...Cards(C), ...Cards(H), ...Cards(S)];
-
-  // ...Diamonds(D)는 "spread" 문법으로, Diamonds(D) 배열의 요소를 개별적인 인자로 풀어서 전달하는 역할을 합니다. 이를 사용하면 배열을 개별적인 값들로 편리하게 전달할 수 있습니다.
-  // 예를 들어, Diamonds(D) 배열에 13개의 카드 객체가 들어있고, ...Diamonds(D)를 사용하면 13개의 카드 객체를 전부 개별적인 인자로 펼쳐서 전달할 수 있습니다.
-  // 다시 원래 코드로 돌아와서 const deck 배열에서 Diamonds(D)를 3번 반복하는데, ...Diamonds(D)를 사용하면 Diamonds(D) 배열의 요소를 개별적인 인자로 풀어서 3번 반복되는 카드 객체들을 각각 개별적인 인자로 전달할 수 있습니다. 이를 통해 deck 배열의 요소를 줄일 수 있습니다.
 
   function Random(num) {
     return Math.floor(Math.random() * num);
