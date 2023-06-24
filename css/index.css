@@ -73,11 +73,14 @@ button {
   height: 50px;
 }
 .start {
-  top: 430px;
+  top: 330px;
+  left: 50px;
 }
 .stop {
-  top: 500px;
+  top: 400px;
+  left: 50px;
 }
 .again {
-  top: 570px;
+  top: 470px;
+  left: 50px;
 }
